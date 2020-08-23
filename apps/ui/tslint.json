@@ -1,0 +1,20 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "prodataBannerCreator",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "prodata-banner-creator",
+      "kebab-case"
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["!**/*"]
+  }
+}
