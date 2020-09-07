@@ -1,8 +1,56 @@
-<div style="text-align: center;">
-  <h1>Welcome to ui!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-  />
-</div>
-<div>Message: {{ hello$ | async | json }}</div>
+<mat-toolbar color="primary">
+  <span>ProData Banner Generator</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<mat-sidenav-container id="desginer-wrapper" fxLayout="row" fxLayoutAlign="stretch">
+
+  <mat-sidenav mode="side" opened fxFlex="60px">
+    <mat-action-list role="list">
+      <mat-list-item role="listitem" *ngFor="let menuItem of designMenuItems"
+        (click)="openDrawer(drawer, menuItem, $event)">
+        <a>
+          <mat-icon>{{ menuItem.icon }}</mat-icon>
+          <small>{{ menuItem.label }}</small>
+        </a>
+      </mat-list-item>
+    </mat-action-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content fxFlex>
+
+    <div id="desginer-drawer-wrapper">
+      <mat-drawer-container [hasBackdrop]="false" fxLayout="row" fxLayoutAlign="start stretch">
+
+        <mat-drawer #drawer [mode]="'side'" fxFlex="380px" id="design-tools">
+          <div fxFlex>
+
+            <h4 id="menu-header">
+              <span class="block w100">{{ (activeToolMenu$ | async)?.label }}</span>
+              <a (click)="drawer.close()" fxFlex="30px" id="drawer-closer">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+              </a>
+            </h4>
+
+            <div>
+              Content
+            </div>
+          </div>
+        </mat-drawer>
+
+        <mat-drawer-content fxFlex>
+          <div id="design-board" class="designer-item">
+            <div id="canvas-wrapper">
+              <canvas id="canvas" width="300" height="250"></canvas>
+            </div>
+          </div>
+        </mat-drawer-content>
+
+      </mat-drawer-container>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<router-outlet></router-outlet>
